@@ -138,6 +138,111 @@
       background: #023652;
       display: flex;
       align-items: center;
+      padding: 0 20px;
+      border-top: 3px solid #63b8ff;
+      gap: 30px;
+      flex-shrink: 0;
+    }
+    .time-text {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0ff;
+      min-width: 330px;
+    }
+    .marquee-box {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-wrap {
+      display: flex;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+    }
+    .marquee-text {
+      font-size: 24px;
+      color: #fff;
+      white-space: nowrap;
+      padding-right: 60px;
+    }
+    .bottom-edit {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .editor-panel {
+      position: fixed;
+      right: 0;
+      top: 36px;
+      width: 420px;
+      bottom: 70px;
+      background: #02253d;
+      padding: 16px;
+      overflow-y: auto;
+      border-left: 2px solid #63b8ff;
+      z-index: 99;
+      display: none;
+    }
+    .editor-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .block-line {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #446;
+    }
+    .input-item {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-blue { background: #217ad9; color: #fff; }
+    .btn-green { background: #23a24d; color: #fff; }
+    .rule-desc {
+      font-size: 14px;
+      color: #ddd;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+    .train-list-desc {
+      font-size: 13px;
+      color: #bbb;
+      margin-top: 16px;
+    }
+    .status-red { color: #ff3333; font-weight: bold; }
+    .status-green { color: #00ff00; font-weight: bold; }
+    .status-white { color: #ffffff; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <button class="edit-btn" id="toggleEditor">打开后台编辑面板</button>
+  </div>
+  <div class="main-wrap">
+    <!-- 左侧车次栏 -->
+    <div class="col" id="leftCol">
+      <div class="table-head">
+        <div>车次</div><div>始发站</div><div>终到站</div><div>开点</div><div>站台</div><div>状态</div>
+      </div>
       <div class="train-list" id="leftTrainList"></div>
       <div class="tip-page" id="leftPageTip"></div>
     </div>
@@ -235,7 +340,7 @@ let leftPageIdx = 0;
 let rightPageIdx = 0;
 let timerPage = null;
 
-// 底部跑马灯文本（已加请家长朋友）
+// 底部跑马灯文本
 let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请管理好自己的携带物品，杆状物品严禁超越安全线";
 
 // 标语配置
@@ -248,7 +353,7 @@ let sloganData = {
   warn: "开车前3分钟停止检票"
 };
 
-// 车次原始数据（172条完整）
+// 车次原始数据
 let trainData = [
   {id:1, trainNo:"G2104", start:"信阳东", end:"威海", time:"07:27", platform:"3"},
   {id:2, trainNo:"G249", start:"漯河西", end:"深圳北", time:"07:32", platform:"1"},
@@ -512,7 +617,7 @@ function renderTrainBox(boxEl, dataArr, pageIdx, pageTipEl) {
     `;
   });
   boxEl.innerHTML = html;
-  pageTipEl.innerHTML = `左侧 ${curr+1}/${totalPage} 页，共${dataArr.length}趟，每${switchSecond}秒切换`;
+  pageTipEl.innerHTML = `${boxEl.id==="leftTrainList"?"左侧":"右侧"} ${curr+1}/${totalPage} 页，共${dataArr.length}趟，每${switchSecond}秒切换`;
 }
 
 // 渲染全部车次
@@ -620,63 +725,4 @@ function addNewTrain() {
 }
 
 // 修改车次
-function updateOneTrain() {
-  const id = Number(editTrainId.value.trim());
-  if (!id) return alert("请输入要修改的车次ID");
-  const target = trainData.find(i=>i.id === id);
-  if (!target) return alert("未找到该ID车次");
-  if (editNo.value.trim()) target.trainNo = editNo.value.trim();
-  if (editStart.value.trim()) target.start = editStart.value.trim();
-  if (editEnd.value.trim()) target.end = editEnd.value.trim();
-  if (editTime.value.trim()) target.time = editTime.value.trim();
-  if (editPlat.value.trim()) target.platform = editPlat.value.trim();
-  editTrainId.value = "";
-  editNo.value = "";
-  editStart.value = "";
-  editEnd.value = "";
-  editTime.value = "";
-  editPlat.value = "";
-  renderAllTrain();
-}
-
-// 绑定事件
-function bindEvents() {
-  toggleEditor.addEventListener("click", toggleEditorShow);
-  // 切换秒数
-  inpSwitchSec.addEventListener("change", ()=>{
-    let val = Number(inpSwitchSec.value);
-    if (val <5) val =5;
-    switchSecond = val;
-    resetPageTimer();
-  });
-  // 保存底部跑马灯
-  saveMarquee.addEventListener("click", ()=>{
-    marqueeText = inpMarquee.value;
-    refreshMarqueeUI();
-  });
-  // 标语输入同步
-  inpSloganTop.addEventListener("input", e=>sloganData.top = e.target.value);
-  inpS1.addEventListener("input", e=>sloganData.s1 = e.target.value);
-  inpS2.addEventListener("input", e=>sloganData.s2 = e.target.value);
-  inpS3.addEventListener("input", e=>sloganData.s3 = e.target.value);
-  inpS4.addEventListener("input", e=>sloganData.s4 = e.target.value);
-  inpWarn.addEventListener("input", e=>sloganData.warn = e.target.value);
-  // 车次编辑按钮
-  btnAdd.addEventListener("click", addNewTrain);
-  btnUpdate.addEventListener("click", updateOneTrain);
-}
-
-// 初始化
-function init() {
-  refreshSloganUI();
-  refreshMarqueeUI();
-  renderAllTrain();
-  resetPageTimer();
-  bindEvents();
-  setInterval(updateTime, 1000);
-  updateTime();
-}
-init();
-</script>
-</body>
-</html>
+function
