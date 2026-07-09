@@ -101,7 +101,7 @@
       width: 100%;
       height: 100%;
     }
-    /* 仅标题单独上移，其余文字不动 */
+    /* 仅标题单独上移，其余文字位置不变 */
     .slogan-title {
       font-size: 46px;
       font-weight: bold;
@@ -328,10 +328,9 @@ const REMOVE_AFTER_STOP_MIN = 2;
 
 let pageIndex = 0;
 let timerPage = null;
-let timerRefreshTrain = null;
 let pageCount = 0;
 
-let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请看管好自身携带的行李物品，杆状物品严禁超越安全线";
+let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请管理好自己的携带物品，杆状物品严禁超越安全线";
 let sloganData = {
   top: "漯河西站欢迎您",
   s1: "社会主义核心价值观",
@@ -651,14 +650,15 @@ function resetPageTimer() {
   }, PAGE_STAY_MS);
 }
 
-// 每秒刷新车次列表（剔除过期）
+// 每秒校验车次是否过期，自动刷新
 function refreshTrainLoop() {
-  const oldValid = getValidTrains();
-  setTimeout(() => {
+  setInterval(() => {
+    const oldValid = getValidTrains();
     const newValid = getValidTrains();
     if (oldValid.length !== newValid.length) {
       resetPageTimer();
     }
+    updateTime();
   }, 1000);
 }
 
@@ -688,4 +688,94 @@ function updateTime() {
   const weekArr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
   const week = weekArr[d.getDay()];
   const pad = num => String(num).padStart(2, "0");
-  const timeStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes
+  const timeStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  timeBox.innerText = timeStr;
+}
+
+function toggleEditorShow() {
+  const isShow = editorPanel.style.display === "block";
+  if (!isShow) {
+    editorPanel.style.display = "block";
+    leftPageTip.style.display = "block";
+    rightPageTip.style.display = "block";
+    bottomEditBox.style.display = "flex";
+    sloganEditBox.style.display = "block";
+    toggleEditor.innerText = "关闭后台编辑面板";
+  } else {
+    editorPanel.style.display = "none";
+    leftPageTip.style.display = "none";
+    rightPageTip.style.display = "none";
+    bottomEditBox.style.display = "none";
+    sloganEditBox.style.display = "none";
+    toggleEditor.innerText = "打开后台编辑面板";
+  }
+}
+
+function addNewTrain() {
+  const no = editNo.value.trim();
+  const start = editStart.value.trim();
+  const end = editEnd.value.trim();
+  const time = editTime.value.trim();
+  const plat = editPlat.value.trim();
+  if (!no || !start || !end || !time || !plat) {
+    alert("请完整填写车次所有信息");
+    return;
+  }
+  const newId = trainData.length > 0 ? Math.max(...trainData.map(i => i.id)) + 1 : 1;
+  trainData.push({id: newId, trainNo: no, start: start, end: end, time: time, platform: plat});
+  editNo.value = "";
+  editStart.value = "";
+  editEnd.value = "";
+  editTime.value = "";
+  editPlat.value = "";
+  resetPageTimer();
+}
+
+function updateSingleTrain() {
+  const targetId = Number(editTrainId.value.trim());
+  if (!targetId) {alert("请输入要修改的车次ID");return;}
+  const targetTrain = trainData.find(item => item.id === targetId);
+  if (!targetTrain) {alert("未找到对应ID的车次");return;}
+  if (editNo.value.trim()) targetTrain.trainNo = editNo.value.trim();
+  if (editStart.value.trim()) targetTrain.start = editStart.value.trim();
+  if (editEnd.value.trim()) targetTrain.end = editEnd.value.trim();
+  if (editTime.value.trim()) targetTrain.time = editTime.value.trim();
+  if (editPlat.value.trim()) targetTrain.platform = editPlat.value.trim();
+  editTrainId.value = "";
+  editNo.value = "";
+  editStart.value = "";
+  editEnd.value = "";
+  editTime.value = "";
+  editPlat.value = "";
+  resetPageTimer();
+}
+
+function bindAllEvents() {
+  toggleEditor.addEventListener("click", toggleEditorShow);
+  saveMarquee.addEventListener("click", () => {
+    marqueeText = inpMarquee.value;
+    refreshMarqueeUI();
+  });
+  inpSloganTop.addEventListener("input", e => sloganData.top = e.target.value);
+  inpS1.addEventListener("input", e => sloganData.s1 = e.target.value);
+  inpS2.addEventListener("input", e => sloganData.s2 = e.target.value);
+  inpS3.addEventListener("input", e => sloganData.s3 = e.target.value);
+  inpS4.addEventListener("input", e => sloganData.s4 = e.target.value);
+  inpWarn.addEventListener("input", e => sloganData.warn = e.target.value);
+  btnAdd.addEventListener("click", addNewTrain);
+  btnUpdate.addEventListener("click", updateSingleTrain);
+}
+
+function initPage() {
+  refreshSloganUI();
+  refreshMarqueeUI();
+  renderAllPage();
+  resetPageTimer();
+  bindAllEvents();
+  refreshTrainLoop();
+  updateTime();
+}
+initPage();
+</script>
+</body>
+</html>
