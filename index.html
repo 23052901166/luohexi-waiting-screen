@@ -724,5 +724,18 @@ function addNewTrain() {
   renderAllTrain();
 }
 
-// 修改车次
-function
+// 修改车次（完整无截断函数）
+function updateOneTrain() {
+  const id = Number(editTrainId.value.trim());
+  if (!id) return alert("请输入要修改的车次ID");
+  const target = trainData.find(item => item.id === id);
+  if (!target) return alert("未找到该ID对应的车次");
+
+  if (editNo.value.trim()) target.trainNo = editNo.value.trim();
+  if (editStart.value.trim()) target.start = editStart.value.trim();
+  if (editEnd.value.trim()) target.end = editEnd.value.trim();
+  if (editTime.value.trim()) target.time = editTime.value.trim();
+  if (editPlat.value.trim()) target.platform = editPlat.value.trim();
+
+  editTrainId.value = "";
+  editNo.value =
