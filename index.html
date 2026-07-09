@@ -9,8 +9,9 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Microsoft YaHei", sans-serif;
+      font-family: "Microsoft YaHei", "SimHei", sans-serif;
     }
+
     body {
       width: 100vw;
       height: 100vh;
@@ -20,6 +21,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .top-bar {
       height: 36px;
       background: #022b42;
@@ -28,6 +30,7 @@
       padding: 0 16px;
       flex-shrink: 0;
     }
+
     .edit-btn {
       padding: 4px 12px;
       background: #2382d2;
@@ -37,6 +40,7 @@
       cursor: pointer;
       font-size: 14px;
     }
+
     .main-wrap {
       flex: 1;
       display: flex;
@@ -44,12 +48,14 @@
       gap: 12px;
       overflow: hidden;
     }
+
     .col {
       flex: 1;
       display: flex;
       flex-direction: column;
       border: 2px solid #63b8ff;
     }
+
     .table-head {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -60,10 +66,12 @@
       text-align: center;
       flex-shrink: 0;
     }
+
     .train-list {
       flex: 1;
       overflow: hidden;
     }
+
     .train-row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -71,9 +79,19 @@
       font-size: 22px;
       text-align: center;
     }
-    .row-even { background: #0f5080; }
-    .row-odd { background: #0a4068; }
-    .no-wrap { white-space: nowrap; }
+
+    .row-even {
+      background: #0f5080;
+    }
+
+    .row-odd {
+      background: #0a4068;
+    }
+
+    .no-wrap {
+      white-space: nowrap;
+    }
+
     .tip-page {
       text-align: center;
       padding: 6px;
@@ -81,16 +99,19 @@
       background: #022b42;
       display: none;
     }
+
     .center-col {
       flex: 1;
       display: flex;
       flex-direction: column;
     }
+
     .scroll-slogan {
       flex: 1;
       overflow: hidden;
       position: relative;
     }
+
     .slogan-inner {
       display: flex;
       flex-direction: column;
@@ -99,7 +120,9 @@
       gap: 26px;
       padding: 10px 16px;
       width: 100%;
+      height: 100%;
     }
+
     .slogan-title {
       font-size: 46px;
       font-weight: bold;
@@ -108,6 +131,7 @@
       text-align: center;
       white-space: nowrap;
     }
+
     .slogan-text {
       font-size: 38px;
       font-weight: bold;
@@ -116,6 +140,7 @@
       text-align: center;
       white-space: nowrap;
     }
+
     .slogan-warning {
       font-size: 36px;
       font-weight: bold;
@@ -125,6 +150,7 @@
       text-align: center;
       white-space: nowrap;
     }
+
     .slogan-edit {
       background: #02253d;
       padding: 10px;
@@ -133,6 +159,7 @@
       flex-shrink: 0;
       display: none;
     }
+
     .bottom-bar {
       height: 70px;
       background: #023652;
@@ -143,37 +170,49 @@
       gap: 30px;
       flex-shrink: 0;
     }
+
     .time-text {
       font-size: 28px;
       font-weight: bold;
       color: #0ff;
       min-width: 330px;
     }
+
     .marquee-box {
       flex: 1;
       overflow: hidden;
       position: relative;
     }
+
     @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
+
     .marquee-wrap {
       display: flex;
       width: max-content;
       animation: marquee 25s linear infinite;
     }
+
     .marquee-text {
       font-size: 24px;
       color: #fff;
       white-space: nowrap;
       padding-right: 60px;
     }
+
     .bottom-edit {
       display: none;
       align-items: center;
       gap: 10px;
     }
+
     .editor-panel {
       position: fixed;
       right: 0;
@@ -187,26 +226,31 @@
       z-index: 99;
       display: none;
     }
+
     .editor-title {
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 12px;
     }
+
     .block-line {
       margin-bottom: 16px;
       padding-bottom: 12px;
       border-bottom: 1px solid #446;
     }
+
     .input-item {
       width: 100%;
       padding: 8px;
       font-size: 16px;
       margin-bottom: 8px;
     }
+
     .btn-group {
       display: flex;
       gap: 10px;
     }
+
     .btn {
       flex: 1;
       padding: 10px;
@@ -215,39 +259,65 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    .btn-blue { background: #217ad9; color: #fff; }
-    .btn-green { background: #23a24d; color: #fff; }
+
+    .btn-blue {
+      background: #217ad9;
+      color: #fff;
+    }
+
+    .btn-green {
+      background: #23a24d;
+      color: #fff;
+    }
+
     .rule-desc {
       font-size: 14px;
       color: #ddd;
       line-height: 1.6;
       margin-top: 12px;
     }
+
     .train-list-desc {
       font-size: 13px;
       color: #bbb;
       margin-top: 16px;
     }
-    .status-red { color: #ff3333; font-weight: bold; }
-    .status-green { color: #00ff00; font-weight: bold; }
-    .status-white { color: #ffffff; font-weight: bold; }
+
+    .status-red {
+      color: #ff3333;
+      font-weight: bold;
+    }
+
+    .status-green {
+      color: #00ff00;
+      font-weight: bold;
+    }
+
+    .status-white {
+      color: #ffffff;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="top-bar">
     <button class="edit-btn" id="toggleEditor">打开后台编辑面板</button>
   </div>
+
   <div class="main-wrap">
-    <!-- 左侧车次栏 -->
     <div class="col" id="leftCol">
       <div class="table-head">
-        <div>车次</div><div>始发站</div><div>终到站</div><div>开点</div><div>站台</div><div>状态</div>
+        <div>车次</div>
+        <div>始发站</div>
+        <div>终到站</div>
+        <div>开点</div>
+        <div>站台</div>
+        <div>状态</div>
       </div>
       <div class="train-list" id="leftTrainList"></div>
       <div class="tip-page" id="leftPageTip"></div>
     </div>
 
-    <!-- 中间标语栏 -->
     <div class="center-col">
       <div class="scroll-slogan" id="sloganBox">
         <div class="slogan-inner" id="sloganInner">
@@ -259,6 +329,7 @@
           <div class="slogan-warning" id="sloganWarn">开车前3分钟停止检票</div>
         </div>
       </div>
+
       <div class="slogan-edit" id="sloganEditBox">
         <div style="font-size:14px;margin-bottom:6px">标语编辑</div>
         <input class="input-item" id="inpSloganTop" placeholder="顶部标题">
@@ -270,17 +341,20 @@
       </div>
     </div>
 
-    <!-- 右侧车次栏 -->
     <div class="col" id="rightCol">
       <div class="table-head">
-        <div>车次</div><div>始发站</div><div>终到站</div><div>开点</div><div>站台</div><div>状态</div>
+        <div>车次</div>
+        <div>始发站</div>
+        <div>终到站</div>
+        <div>开点</div>
+        <div>站台</div>
+        <div>状态</div>
       </div>
       <div class="train-list" id="rightTrainList"></div>
       <div class="tip-page" id="rightPageTip"></div>
     </div>
   </div>
 
-  <!-- 底部时间+跑马灯 -->
   <div class="bottom-bar">
     <div class="time-text" id="timeBox"></div>
     <div class="marquee-box">
@@ -295,7 +369,6 @@
     </div>
   </div>
 
-  <!-- 右侧编辑面板 -->
   <div class="editor-panel" id="editorPanel">
     <div class="editor-title">参数与车次编辑区</div>
 
@@ -318,424 +391,479 @@
     </div>
 
     <div class="rule-desc">
-规则说明：<br/>
-1.始发站=漯河西 → 始发车；其余过路车<br/>
-2.正在候车白色，即将/开始检票绿色，停止检票红色<br/>
-3.每页8条，左右独立翻页，上方可修改秒数<br/>
-4.全部车次展示，无时间过滤<br/>
-5.分页提示仅打开编辑面板时显示
+      规则说明：<br>
+      1. 始发站=漯河西 → 始发车；其余过路车<br>
+      2. 正在候车白色，即将/开始检票绿色，停止检票红色<br>
+      3. 每页8条，左右独立翻页，上方可修改秒数<br>
+      4. 全部车次展示，无时间过滤<br>
+      5. 分页提示仅打开编辑面板时显示
     </div>
 
-    <div class="train-list-desc">
-后台全部车次列表：
-    </div>
+    <div class="train-list-desc">后台全部车次列表：</div>
     <div id="trainListShow"></div>
   </div>
 
-<script>
-// 1. 基础配置
-const PAGE_SIZE = 8;
-let switchSecond = 30;
-let leftPageIdx = 0;
-let rightPageIdx = 0;
-let timerPage = null;
+  <script>
+    const PAGE_SIZE = 8;
+    let switchSecond = 30;
+    let leftPageIdx = 0;
+    let rightPageIdx = 0;
+    let timerPage = null;
 
-// 底部跑马灯文本
-let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请管理好自己的携带物品，杆状物品严禁超越安全线";
+    let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请管理好自己的携带物品，杆状物品严禁超越安全线";
 
-// 标语配置
-let sloganData = {
-  top: "漯河西站欢迎您",
-  s1: "社会主义核心价值观",
-  s2: "富强 民主 文明 和谐",
-  s3: "自由 平等 公正 法治",
-  s4: "爱国 敬业 诚信 友善",
-  warn: "开车前3分钟停止检票"
-};
+    let sloganData = {
+      top: "漯河西站欢迎您",
+      s1: "社会主义核心价值观",
+      s2: "富强 民主 文明 和谐",
+      s3: "自由 平等 公正 法治",
+      s4: "爱国 敬业 诚信 友善",
+      warn: "开车前3分钟停止检票"
+    };
 
-// 车次原始数据
-let trainData = [
-  {id:1, trainNo:"G2104", start:"信阳东", end:"威海", time:"07:27", platform:"3"},
-  {id:2, trainNo:"G249", start:"漯河西", end:"深圳北", time:"07:32", platform:"1"},
-  {id:3, trainNo:"G478", start:"北京西", end:"汉口", time:"07:57", platform:"2"},
-  {id:4, trainNo:"C898", start:"信阳南", end:"郑州东", time:"08:05", platform:"12"},
-  {id:5, trainNo:"G3484", start:"汉口", end:"沈阳北", time:"08:09", platform:"4"},
-  {id:6, trainNo:"C3567", start:"漯河西", end:"郑州东", time:"08:15", platform:"11"},
-  {id:7, trainNo:"G3821", start:"漯河西", end:"上海虹桥", time:"08:17", platform:"8"},
-  {id:8, trainNo:"G516", start:"汉口", end:"呼和浩特东", time:"08:22", platform:"3"},
-  {id:9, trainNo:"G3010", start:"武汉", end:"青岛", time:"08:27", platform:"4"},
-  {id:10, trainNo:"G769", start:"漯河西", end:"成都东", time:"08:32", platform:"5"},
-  {id:11, trainNo:"G577", start:"洛阳龙门", end:"上海虹桥", time:"08:35", platform:"8"},
-  {id:12, trainNo:"C2369", start:"郑州航空港", end:"信阳南", time:"08:38", platform:"9"},
-  {id:13, trainNo:"C3356", start:"驻马店西", end:"郑州东", time:"08:40", platform:"11"},
-  {id:14, trainNo:"G423", start:"郑州东", end:"广州南", time:"08:44", platform:"1"},
-  {id:15, trainNo:"G587", start:"平顶山西", end:"上海虹桥", time:"08:46", platform:"7"},
-  {id:16, trainNo:"G3674", start:"漯河西", end:"乌鲁木齐", time:"08:47", platform:"3"},
-  {id:17, trainNo:"G2045", start:"郑州东", end:"厦门", time:"08:47", platform:"2"},
-  {id:18, trainNo:"G1185", start:"洛阳龙门", end:"深圳北", time:"09:06", platform:"1"},
-  {id:19, trainNo:"G1187", start:"太原南", end:"杭州东", time:"09:14", platform:"8"},
-  {id:20, trainNo:"G1535", start:"濮阳东", end:"昆明南", time:"09:15", platform:"1"},
-  {id:21, trainNo:"C3456", start:"明港东", end:"郑州航空港", time:"09:20", platform:"12"},
-  {id:22, trainNo:"G3757", start:"大同南", end:"上海虹桥", time:"09:22", platform:"8"},
-  {id:23, trainNo:"C7834", start:"信阳南", end:"周口东", time:"09:25", platform:"11"},
-  {id:24, trainNo:"G1278", start:"武汉", end:"哈尔滨西", time:"09:31", platform:"3"},
-  {id:25, trainNo:"C3345", start:"郑州东", end:"信阳东", time:"09:35", platform:"9"},
-  {id:26, trainNo:"G522", start:"武汉", end:"北京西", time:"09:54", platform:"4"},
-  {id:27, trainNo:"G867", start:"西安北", end:"苍南", time:"10:03", platform:"2"},
-  {id:28, trainNo:"C8984", start:"潢川南", end:"郑州航空港", time:"10:03", platform:"11"},
-  {id:29, trainNo:"G502", start:"长沙南", end:"北京西", time:"10:08", platform:"4"},
-  {id:30, trainNo:"G5795", start:"镇江南", end:"焦作西", time:"10:16", platform:"5"},
-  {id:31, trainNo:"G2295", start:"西安北", end:"厦门北", time:"10:16", platform:"1"},
-  {id:32, trainNo:"C6439", start:"焦作南", end:"信阳南", time:"10:25", platform:"9"},
-  {id:33, trainNo:"C6733", start:"开封北", end:"商丘南", time:"10:35", platform:"10"},
-  {id:34, trainNo:"C2368", start:"信阳东", end:"郑州东", time:"10:37", platform:"12"},
-  {id:35, trainNo:"G1401", start:"石家庄", end:"南宁东", time:"10:33", platform:"2"},
-  {id:36, trainNo:"G1290", start:"长沙南", end:"长春西", time:"10:39", platform:"4"},
-  {id:37, trainNo:"G571", start:"阜阳西", end:"重庆西", time:"10:39", platform:"3"},
-  {id:38, trainNo:"G504", start:"长沙南", end:"北京西", time:"10:49", platform:"1"},
-  {id:39, trainNo:"G3834", start:"襄阳东", end:"北京西", time:"10:53", platform:"3"},
-  {id:40, trainNo:"G2085", start:"郑州东", end:"汉口", time:"10:54", platform:"2"},
-  {id:41, trainNo:"G729", start:"太原", end:"黄山", time:"11:01", platform:"8"},
-  {id:42, trainNo:"G511", start:"北京西", end:"宜昌东", time:"11:07", platform:"1"},
-  {id:43, trainNo:"G597", start:"长治东", end:"宣城", time:"11:08", platform:"7"},
-  {id:44, trainNo:"G856", start:"武汉", end:"西安北", time:"11:10", platform:"4"},
-  {id:45, trainNo:"G1537", start:"北京西", end:"昆明南", time:"11:12", platform:"1"},
-  {id:46, trainNo:"G1461", start:"济南西", end:"南宁东", time:"11:18", platform:"2"},
-  {id:47, trainNo:"G3755", start:"合肥南", end:"洛阳龙门", time:"11:22", platform:"6"},
-  {id:48, trainNo:"G952", start:"长沙南", end:"青岛", time:"11:23", platform:"3"},
-  {id:49, trainNo:"C8986", start:"罗山北", end:"郑州航空港", time:"11:30", platform:"12"},
-  {id:50, trainNo:"G3837", start:"北京", end:"赣州西", time:"11:33", platform:"1"},
-  {id:51, trainNo:"C7234", start:"周口东", end:"开封北", time:"11:35", platform:"9"},
-  {id:52, trainNo:"G3643", start:"济南东", end:"贵阳北", time:"11:38", platform:"2"},
-  {id:53, trainNo:"G2386", start:"南京南", end:"洛阳龙门", time:"11:42", platform:"5"},
-  {id:54, trainNo:"G640", start:"南昌西", end:"兰州西", time:"11:45", platform:"4"},
-  {id:55, trainNo:"G297", start:"汉中", end:"南昌", time:"11:45", platform:"7"},
-  {id:56, trainNo:"G1025", start:"北京西", end:"福田", time:"11:55", platform:"1"},
-  {id:57, trainNo:"G1848", start:"邵阳", end:"烟台", time:"11:56", platform:"3"},
-  {id:58, trainNo:"G647", start:"朔州东", end:"杭州东", time:"12:03", platform:"8"},
-  {id:59, trainNo:"G945", start:"济南西", end:"深圳北", time:"12:05", platform:"2"},
-  {id:60, trainNo:"C322", start:"信阳东", end:"郑州航空港", time:"12:05", platform:"11"},
-  {id:61, trainNo:"G9958", start:"怀化南", end:"天津", time:"12:17", platform:"3"},
-  {id:62, trainNo:"G864", start:"长沙南", end:"兰州西", time:"12:31", platform:"3"},
-  {id:63, trainNo:"C5785", start:"郑州航空港", end:"南阳东", time:"12:33", platform:"9"},
-  {id:64, trainNo:"G1379", start:"晋城东", end:"芜湖", time:"12:35", platform:"7"},
-  {id:65, trainNo:"G942", start:"广州南", end:"青岛", time:"12:45", platform:"3"},
-  {id:66, trainNo:"G1378", start:"芜湖", end:"太原南", time:"12:57", platform:"5"},
-  {id:67, trainNo:"G1189", start:"郑州东", end:"深圳北", time:"13:00", platform:"1"},
-  {id:68, trainNo:"G687", start:"洛阳龙门", end:"温州南", time:"13:05", platform:"7"},
-  {id:69, trainNo:"G629", start:"周口东", end:"自贡南", time:"13:05", platform:"6"},
-  {id:70, trainNo:"G2065", start:"济南西", end:"南宁东", time:"13:06", platform:"2"},
-  {id:71, trainNo:"G852", start:"武汉", end:"西宁", time:"13:19", platform:"3"},
-  {id:72, trainNo:"C6786", start:"信阳东", end:"洛阳龙门", time:"13:23", platform:"11"},
-  {id:73, trainNo:"G692", start:"武汉", end:"太原南", time:"13:25", platform:"4"},
-  {id:74, trainNo:"G941", start:"青岛", end:"广州南", time:"13:32", platform:"2"},
-  {id:75, trainNo:"G689", start:"北京西", end:"武汉", time:"13:40", platform:"1"},
-  {id:76, trainNo:"G863", start:"兰州西", end:"长沙南", time:"13:46", platform:"2"},
-  {id:77, trainNo:"G1995", start:"青岛", end:"宜昌东", time:"13:50", platform:"1"},
-  {id:78, trainNo:"G1026", start:"福田", end:"北京西", time:"13:57", platform:"3"},
-  {id:79, trainNo:"G3785", start:"日照", end:"深圳北", time:"14:10", platform:"1"},
-  {id:80, trainNo:"G8902", start:"温州", end:"呼和浩特东", time:"14:15", platform:"5"},
-  {id:81, trainNo:"G913", start:"西安北", end:"香港西九龙", time:"14:21", platform:"1"},
-  {id:82, trainNo:"G2077", start:"青岛北", end:"广州南", time:"14:33", platform:"2"},
-  {id:83, trainNo:"G438", start:"商丘", end:"成都东", time:"14:37", platform:"6"},
-  {id:84, trainNo:"G841", start:"西安北", end:"深圳北", time:"14:38", platform:"1"},
-  {id:85, trainNo:"G543", start:"郑州东", end:"珠海北", time:"14:42", platform:"2"},
-  {id:86, trainNo:"G1580", start:"广州南", end:"北京西", time:"14:49", platform:"3"},
-  {id:87, trainNo:"G9843", start:"周口东", end:"武汉", time:"14:50", platform:"1"},
-  {id:88, trainNo:"G3649", start:"北京西", end:"张家界西", time:"15:03", platform:"1"},
-  {id:89, trainNo:"C3793", start:"焦作西", end:"武汉", time:"15:08", platform:"9"},
-  {id:90, trainNo:"C356", start:"漯河西", end:"开封", time:"15:09", platform:"12"},
-  {id:91, trainNo:"G1598", start:"盐城", end:"成都东", time:"15:10", platform:"7"},
-  {id:92, trainNo:"G1186", start:"深圳北", end:"焦作西", time:"15:15", platform:"4"},
-  {id:93, trainNo:"G1168", start:"上海虹桥", end:"银川", time:"15:20", platform:"5"},
-  {id:94, trainNo:"G9557", start:"天津", end:"怀化南", time:"15:32", platform:"2"},
-  {id:95, trainNo:"G5774", start:"上海南", end:"宝鸡", time:"15:42", platform:"5"},
-  {id:96, trainNo:"C5798", start:"信阳东", end:"平顶山西", time:"15:50", platform:"11"},
-  {id:97, trainNo:"G2046", start:"厦门", end:"郑州东", time:"15:54", platform:"3"},
-  {id:98, trainNo:"G846", start:"杭州东", end:"西安北", time:"16:05", platform:"6"},
-  {id:99, trainNo:"G2171", start:"延安", end:"广州南", time:"16:07", platform:"2"},
-  {id:100, trainNo:"G3617", start:"青岛北", end:"桂林北", time:"16:16", platform:"2"},
-  {id:101, trainNo:"G953", start:"商丘", end:"成都东", time:"16:25", platform:"6"},
-  {id:102, trainNo:"G951", start:"青岛", end:"长沙南", time:"16:27", platform:"1"},
-  {id:103, trainNo:"G1051", start:"北京西", end:"广州南", time:"16:30", platform:"1"},
-  {id:104, trainNo:"G567", start:"郑州东", end:"广州", time:"16:37", platform:"2"},
-  {id:105, trainNo:"G914", start:"香港西九龙", end:"西安北", time:"16:49", platform:"3"},
-  {id:106, trainNo:"G4375", start:"成都东", end:"合肥南", time:"16:55", platform:"8"},
-  {id:107, trainNo:"G845", start:"兰州西", end:"广州南", time:"17:10", platform:"1"},
-  {id:108, trainNo:"G521", start:"北京西", end:"武汉", time:"17:15", platform:"2"},
-  {id:109, trainNo:"G1847", start:"烟台", end:"邵阳", time:"17:20", platform:"2"},
-  {id:110, trainNo:"G573", start:"菏泽东", end:"宜宾北", time:"17:22", platform:"6"},
-  {id:111, trainNo:"G851", start:"西宁", end:"武汉", time:"17:24", platform:"1"},
-  {id:112, trainNo:"G1044", start:"珠海", end:"北京西", time:"17:25", platform:"3"},
-  {id:113, trainNo:"G520", start:"成都东", end:"德州东", time:"17:27", platform:"7"},
-  {id:114, trainNo:"G2032", start:"宜昌东", end:"新乡东", time:"17:35", platform:"2"},
-  {id:115, trainNo:"G4074", start:"南京南", end:"乌兰察布", time:"17:47", platform:"5"},
-  {id:116, trainNo:"G2625", start:"大连北", end:"武汉", time:"17:41", platform:"1"},
-  {id:117, trainNo:"G376", start:"苏州北", end:"洛阳龙门", time:"17:55", platform:"6"},
-  {id:118, trainNo:"G3483", start:"沈阳北", end:"汉口", time:"17:58", platform:"1"},
-  {id:119, trainNo:"G377", start:"洛阳龙门", end:"苏州东", time:"18:05", platform:"7"},
-  {id:120, trainNo:"G496", start:"上海南", end:"平顶山西", time:"18:10", platform:"5"},
-  {id:121, trainNo:"G108", start:"长沙南", end:"北京西", time:"18:10", platform:"3"},
-  {id:122, trainNo:"G766", start:"周口东", end:"大同南", time:"18:17", platform:"6"},
-  {id:123, trainNo:"G1515", start:"北京西", end:"宜昌北", time:"18:23", platform:"1"},
-  {id:124, trainNo:"G337", start:"上海虹桥", end:"呼和浩特东", time:"18:25", platform:"6"},
-  {id:125, trainNo:"C5747", start:"焦作西", end:"舞阳北", time:"18:32", platform:"10"},
-  {id:126, trainNo:"G616", start:"汕头", end:"北京西", time:"18:37", platform:"3"},
-  {id:127, trainNo:"G1215", start:"沈阳", end:"长沙南", time:"18:38", platform:"1"},
-  {id:128, trainNo:"G503", start:"北京西", end:"株洲西", time:"18:44", platform:"1"},
-  {id:129, trainNo:"G765", start:"漯河西", end:"延安", time:"18:49", platform:"5"},
-  {id:130, trainNo:"G855", start:"北京西", end:"株洲西", time:"18:50", platform:"2"},
-  {id:131, trainNo:"G2296", start:"厦门北", end:"西安北", time:"18:53", platform:"4"},
-  {id:132, trainNo:"G1289", start:"长春西", end:"长沙南", time:"18:57", platform:"2"},
-  {id:133, trainNo:"G648", start:"厦门", end:"郑州东", time:"19:09", platform:"3"},
-  {id:134, trainNo:"G398", start:"南宁东", end:"北京西", time:"19:22", platform:"4"},
-  {id:135, trainNo:"G830", start:"深圳北", end:"西安北", time:"19:27", platform:"3"},
-  {id:136, trainNo:"G482", start:"重庆北", end:"徐州东", time:"19:35", platform:"3"},
-  {id:137, trainNo:"G7462", start:"嘉兴南", end:"宝鸡南", time:"19:37", platform:"5"},
-  {id:138, trainNo:"G4355", start:"北京南", end:"深圳北", time:"19:37", platform:"1"},
-  {id:139, trainNo:"G508", start:"长沙南", end:"北京西", time:"19:39", platform:"4"},
-  {id:140, trainNo:"C3577", start:"郑州东", end:"舞阳北", time:"19:40", platform:"10"},
-  {id:141, trainNo:"G5345", start:"漯河西", end:"长沙南", time:"19:50", platform:"2"},
-  {id:142, trainNo:"G1990", start:"武汉", end:"郑州东", time:"19:56", platform:"3"},
-  {id:143, trainNo:"G7769", start:"焦作南", end:"周口东", time:"19:56", platform:"8"},
-  {id:144, trainNo:"G2789", start:"漯河西", end:"合肥南", time:"20:00", platform:"7"},
-  {id:145, trainNo:"C3595", start:"郑州东", end:"潢川东", time:"20:07", platform:"9"},
-  {id:146, trainNo:"G1264", start:"广州南", end:"郑州东", time:"20:10", platform:"3"},
-  {id:147, trainNo:"G5602", start:"上海虹桥", end:"焦作西", time:"20:15", platform:"5"},
-  {id:148, trainNo:"G1164", start:"广州南", end:"濮阳东", time:"20:15", platform:"4"},
-  {id:149, trainNo:"G1277", start:"哈尔滨西", end:"武汉", time:"20:21", platform:"2"},
-  {id:150, trainNo:"G3389", start:"洛阳龙门", end:"漯河西", time:"20:25", platform:"7"},
-  {id:151, trainNo:"G525", start:"北京西", end:"武汉", time:"20:25", platform:"1"},
-  {id:152, trainNo:"G2235", start:"西安北", end:"合肥南", time:"20:37", platform:"8"},
-  {id:153, trainNo:"G507", start:"北京西", end:"长沙南", time:"20:39", platform:"1"},
-  {id:154, trainNo:"G2103", start:"威海", end:"信阳东", time:"20:47", platform:"2"},
-  {id:155, trainNo:"C8983", start:"郑州东", end:"固始东", time:"20:57", platform:"10"},
-  {id:156, trainNo:"C3357", start:"郑州东", end:"驻马店西", time:"21:05", platform:"9"},
-  {id:157, trainNo:"G653", start:"杭州东", end:"洛阳龙门", time:"21:13", platform:"5"},
-  {id:158, trainNo:"G1536", start:"昆明南", end:"濮阳东", time:"21:13", platform:"3"},
-  {id:159, trainNo:"G527", start:"北京西", end:"武汉", time:"21:20", platform:"1"},
-  {id:160, trainNo:"C8987", start:"郑州航空港", end:"罗山北", time:"21:22", platform:"9"},
-  {id:161, trainNo:"G8988", start:"岳阳北", end:"石家庄", time:"21:23", platform:"3"},
-  {id:162, trainNo:"G2282", start:"福田", end:"郑州东", time:"21:30", platform:"4"},
-  {id:163, trainNo:"G3009", start:"青岛", end:"武汉", time:"21:53", platform:"1"},
-  {id:164, trainNo:"G3752", start:"金华", end:"洛阳龙门", time:"21:55", platform:"6"},
-  {id:165, trainNo:"G3822", start:"上海虹桥", end:"漯河西", time:"21:59", platform:"8"},
-  {id:166, trainNo:"G248", start:"深圳北", end:"漯河西", time:"22:03", platform:"1"},
-  {id:167, trainNo:"G5323", start:"洛阳龙门", end:"阜阳西", time:"22:07", platform:"7"},
-  {id:168, trainNo:"G1190", start:"深圳北", end:"郑州东", time:"22:15", platform:"3"},
-  {id:169, trainNo:"G2236", start:"汉口", end:"郑州东", time:"22:18", platform:"4"},
-  {id:170, trainNo:"G455", start:"长治东", end:"周口东", time:"22:27", platform:"7"},
-  {id:171, trainNo:"G546", start:"广州南", end:"郑州东", time:"22:36", platform:"3"},
-  {id:172, trainNo:"C3767", start:"郑州东", end:"漯河西", time:"22:25", platform:"11"}
-];
+    let trainData = [
+      { id: 1, trainNo: "G2104", start: "信阳东", end: "威海", time: "07:27", platform: "3" },
+      { id: 2, trainNo: "G249", start: "漯河西", end: "深圳北", time: "07:32", platform: "1" },
+      { id: 3, trainNo: "G478", start: "北京西", end: "汉口", time: "07:57", platform: "2" },
+      { id: 4, trainNo: "C898", start: "信阳南", end: "郑州东", time: "08:05", platform: "12" },
+      { id: 5, trainNo: "G3484", start: "汉口", end: "沈阳北", time: "08:09", platform: "4" },
+      { id: 6, trainNo: "C3567", start: "漯河西", end: "郑州东", time: "08:15", platform: "11" },
+      { id: 7, trainNo: "G3821", start: "漯河西", end: "上海虹桥", time: "08:17", platform: "8" },
+      { id: 8, trainNo: "G516", start: "汉口", end: "呼和浩特东", time: "08:22", platform: "3" },
+      { id: 9, trainNo: "G3010", start: "武汉", end: "青岛", time: "08:27", platform: "4" },
+      { id: 10, trainNo: "G769", start: "漯河西", end: "成都东", time: "08:32", platform: "5" },
+      { id: 11, trainNo: "G577", start: "洛阳龙门", end: "上海虹桥", time: "08:35", platform: "8" },
+      { id: 12, trainNo: "C2369", start: "郑州航空港", end: "信阳南", time: "08:38", platform: "9" },
+      { id: 13, trainNo: "C3356", start: "驻马店西", end: "郑州东", time: "08:40", platform: "11" },
+      { id: 14, trainNo: "G423", start: "郑州东", end: "广州南", time: "08:44", platform: "1" },
+      { id: 15, trainNo: "G587", start: "平顶山西", end: "上海虹桥", time: "08:46", platform: "7" },
+      { id: 16, trainNo: "G3674", start: "漯河西", end: "乌鲁木齐", time: "08:47", platform: "3" },
+      { id: 17, trainNo: "G2045", start: "郑州东", end: "厦门", time: "08:47", platform: "2" },
+      { id: 18, trainNo: "G1185", start: "洛阳龙门", end: "深圳北", time: "09:06", platform: "1" },
+      { id: 19, trainNo: "G1187", start: "太原南", end: "杭州东", time: "09:14", platform: "8" },
+      { id: 20, trainNo: "G1535", start: "濮阳东", end: "昆明南", time: "09:15", platform: "1" },
+      { id: 21, trainNo: "C3456", start: "明港东", end: "郑州航空港", time: "09:20", platform: "12" },
+      { id: 22, trainNo: "G3757", start: "大同南", end: "上海虹桥", time: "09:22", platform: "8" },
+      { id: 23, trainNo: "C7834", start: "信阳南", end: "周口东", time: "09:25", platform: "11" },
+      { id: 24, trainNo: "G1278", start: "武汉", end: "哈尔滨西", time: "09:31", platform: "3" },
+      { id: 25, trainNo: "C3345", start: "郑州东", end: "信阳东", time: "09:35", platform: "9" },
+      { id: 26, trainNo: "G522", start: "武汉", end: "北京西", time: "09:54", platform: "4" },
+      { id: 27, trainNo: "G867", start: "西安北", end: "苍南", time: "10:03", platform: "2" },
+      { id: 28, trainNo: "C8984", start: "潢川南", end: "郑州航空港", time: "10:03", platform: "11" },
+      { id: 29, trainNo: "G502", start: "长沙南", end: "北京西", time: "10:08", platform: "4" },
+      { id: 30, trainNo: "G5795", start: "镇江南", end: "焦作西", time: "10:16", platform: "5" },
+      { id: 31, trainNo: "G2295", start: "西安北", end: "厦门北", time: "10:16", platform: "1" },
+      { id: 32, trainNo: "C6439", start: "焦作南", end: "信阳南", time: "10:25", platform: "9" },
+      { id: 33, trainNo: "C6733", start: "开封北", end: "商丘南", time: "10:35", platform: "10" },
+      { id: 34, trainNo: "C2368", start: "信阳东", end: "郑州东", time: "10:37", platform: "12" },
+      { id: 35, trainNo: "G1401", start: "石家庄", end: "南宁东", time: "10:33", platform: "2" },
+      { id: 36, trainNo: "G1290", start: "长沙南", end: "长春西", time: "10:39", platform: "4" },
+      { id: 37, trainNo: "G571", start: "阜阳西", end: "重庆西", time: "10:39", platform: "3" },
+      { id: 38, trainNo: "G504", start: "长沙南", end: "北京西", time: "10:49", platform: "1" },
+      { id: 39, trainNo: "G3834", start: "襄阳东", end: "北京西", time: "10:53", platform: "3" },
+      { id: 40, trainNo: "G2085", start: "郑州东", end: "汉口", time: "10:54", platform: "2" },
+      { id: 41, trainNo: "G729", start: "太原", end: "黄山", time: "11:01", platform: "8" },
+      { id: 42, trainNo: "G511", start: "北京西", end: "宜昌东", time: "11:07", platform: "1" },
+      { id: 43, trainNo: "G597", start: "长治东", end: "宣城", time: "11:08", platform: "7" },
+      { id: 44, trainNo: "G856", start: "武汉", end: "西安北", time: "11:10", platform: "4" },
+      { id: 45, trainNo: "G1537", start: "北京西", end: "昆明南", time: "11:12", platform: "1" },
+      { id: 46, trainNo: "G1461", start: "济南西", end: "南宁东", time: "11:18", platform: "2" },
+      { id: 47, trainNo: "G3755", start: "合肥南", end: "洛阳龙门", time: "11:22", platform: "6" },
+      { id: 48, trainNo: "G952", start: "长沙南", end: "青岛", time: "11:23", platform: "3" },
+      { id: 49, trainNo: "C8986", start: "罗山北", end: "郑州航空港", time: "11:30", platform: "12" },
+      { id: 50, trainNo: "G3837", start: "北京", end: "赣州西", time: "11:33", platform: "1" },
+      { id: 51, trainNo: "C7234", start: "周口东", end: "开封北", time: "11:35", platform: "9" },
+      { id: 52, trainNo: "G3643", start: "济南东", end: "贵阳北", time: "11:38", platform: "2" },
+      { id: 53, trainNo: "G2386", start: "南京南", end: "洛阳龙门", time: "11:42", platform: "5" },
+      { id: 54, trainNo: "G640", start: "南昌西", end: "兰州西", time: "11:45", platform: "4" },
+      { id: 55, trainNo: "G297", start: "汉中", end: "南昌", time: "11:45", platform: "7" },
+      { id: 56, trainNo: "G1025", start: "北京西", end: "福田", time: "11:55", platform: "1" },
+      { id: 57, trainNo: "G1848", start: "邵阳", end: "烟台", time: "11:56", platform: "3" },
+      { id: 58, trainNo: "G647", start: "朔州东", end: "杭州东", time: "12:03", platform: "8" },
+      { id: 59, trainNo: "G945", start: "济南西", end: "深圳北", time: "12:05", platform: "2" },
+      { id: 60, trainNo: "C322", start: "信阳东", end: "郑州航空港", time: "12:05", platform: "11" },
+      { id: 61, trainNo: "G9958", start: "怀化南", end: "天津", time: "12:17", platform: "3" },
+      { id: 62, trainNo: "G864", start: "长沙南", end: "兰州西", time: "12:31", platform: "3" },
+      { id: 63, trainNo: "C5785", start: "郑州航空港", end: "南阳东", time: "12:33", platform: "9" },
+      { id: 64, trainNo: "G1379", start: "晋城东", end: "芜湖", time: "12:35", platform: "7" },
+      { id: 65, trainNo: "G942", start: "广州南", end: "青岛", time: "12:45", platform: "3" },
+      { id: 66, trainNo: "G1378", start: "芜湖", end: "太原南", time: "12:57", platform: "5" },
+      { id: 67, trainNo: "G1189", start: "郑州东", end: "深圳北", time: "13:00", platform: "1" },
+      { id: 68, trainNo: "G687", start: "洛阳龙门", end: "温州南", time: "13:05", platform: "7" },
+      { id: 69, trainNo: "G629", start: "周口东", end: "自贡南", time: "13:05", platform: "6" },
+      { id: 70, trainNo: "G2065", start: "济南西", end: "南宁东", time: "13:06", platform: "2" },
+      { id: 71, trainNo: "G852", start: "武汉", end: "西宁", time: "13:19", platform: "3" },
+      { id: 72, trainNo: "C6786", start: "信阳东", end: "洛阳龙门", time: "13:23", platform: "11" },
+      { id: 73, trainNo: "G692", start: "武汉", end: "太原南", time: "13:25", platform: "4" },
+      { id: 74, trainNo: "G941", start: "青岛", end: "广州南", time: "13:32", platform: "2" },
+      { id: 75, trainNo: "G689", start: "北京西", end: "武汉", time: "13:40", platform: "1" },
+      { id: 76, trainNo: "G863", start: "兰州西", end: "长沙南", time: "13:46", platform: "2" },
+      { id: 77, trainNo: "G1995", start: "青岛", end: "宜昌东", time: "13:50", platform: "1" },
+      { id: 78, trainNo: "G1026", start: "福田", end: "北京西", time: "13:57", platform: "3" },
+      { id: 79, trainNo: "G3785", start: "日照", end: "深圳北", time: "14:10", platform: "1" },
+      { id: 80, trainNo: "G8902", start: "温州", end: "呼和浩特东", time: "14:15", platform: "5" },
+      { id: 81, trainNo: "G913", start: "西安北", end: "香港西九龙", time: "14:21", platform: "1" },
+      { id: 82, trainNo: "G2077", start: "青岛北", end: "广州南", time: "14:33", platform: "2" },
+      { id: 83, trainNo: "G438", start: "商丘", end: "成都东", time: "14:37", platform: "6" },
+      { id: 84, trainNo: "G841", start: "西安北", end: "深圳北", time: "14:38", platform: "1" },
+      { id: 85, trainNo: "G543", start: "郑州东", end: "珠海北", time: "14:42", platform: "2" },
+      { id: 86, trainNo: "G1580", start: "广州南", end: "北京西", time: "14:49", platform: "3" },
+      { id: 87, trainNo: "G9843", start: "周口东", end: "武汉", time: "14:50", platform: "1" },
+      { id: 88, trainNo: "G3649", start: "北京西", end: "张家界西", time: "15:03", platform: "1" },
+      { id: 89, trainNo: "C3793", start: "焦作西", end: "武汉", time: "15:08", platform: "9" },
+      { id: 90, trainNo: "C356", start: "漯河西", end: "开封", time: "15:09", platform: "12" },
+      { id: 91, trainNo: "G1598", start: "盐城", end: "成都东", time: "15:10", platform: "7" },
+      { id: 92, trainNo: "G1186", start: "深圳北", end: "焦作西", time: "15:15", platform: "4" },
+      { id: 93, trainNo: "G1168", start: "上海虹桥", end: "银川", time: "15:20", platform: "5" },
+      { id: 94, trainNo: "G9557", start: "天津", end: "怀化南", time: "15:32", platform: "2" },
+      { id: 95, trainNo: "G5774", start: "上海南", end: "宝鸡", time: "15:42", platform: "5" },
+      { id: 96, trainNo: "C5798", start: "信阳东", end: "平顶山西", time: "15:50", platform: "11" },
+      { id: 97, trainNo: "G2046", start: "厦门", end: "郑州东", time: "15:54", platform: "3" },
+      { id: 98, trainNo: "G846", start: "杭州东", end: "西安北", time: "16:05", platform: "6" },
+      { id: 99, trainNo: "G2171", start: "延安", end: "广州南", time: "16:07", platform: "2" },
+      { id: 100, trainNo: "G3617", start: "青岛北", end: "桂林北", time: "16:16", platform: "2" },
+      { id: 101, trainNo: "G953", start: "商丘", end: "成都东", time: "16:25", platform: "6" },
+      { id: 102, trainNo: "G951", start: "青岛", end: "长沙南", time: "16:27", platform: "1" },
+      { id: 103, trainNo: "G1051", start: "北京西", end: "广州南", time: "16:30", platform: "1" },
+      { id: 104, trainNo: "G567", start: "郑州东", end: "广州", time: "16:37", platform: "2" },
+      { id: 105, trainNo: "G914", start: "香港西九龙", end: "西安北", time: "16:49", platform: "3" },
+      { id: 106, trainNo: "G4375", start: "成都东", end: "合肥南", time: "16:55", platform: "8" },
+      { id: 107, trainNo: "G845", start: "兰州西", end: "广州南", time: "17:10", platform: "1" },
+      { id: 108, trainNo: "G521", start: "北京西", end: "武汉", time: "17:15", platform: "2" },
+      { id: 109, trainNo: "G1847", start: "烟台", end: "邵阳", time: "17:20", platform: "2" },
+      { id: 110, trainNo: "G573", start: "菏泽东", end: "宜宾北", time: "17:22", platform: "6" },
+      { id: 111, trainNo: "G851", start: "西宁", end: "武汉", time: "17:24", platform: "1" },
+      { id: 112, trainNo: "G1044", start: "珠海", end: "北京西", time: "17:25", platform: "3" },
+      { id: 113, trainNo: "G520", start: "成都东", end: "德州东", time: "17:27", platform: "7" },
+      { id: 114, trainNo: "G2032", start: "宜昌东", end: "新乡东", time: "17:35", platform: "2" },
+      { id: 115, trainNo: "G4074", start: "南京南", end: "乌兰察布", time: "17:47", platform: "5" },
+      { id: 116, trainNo: "G2625", start: "大连北", end: "武汉", time: "17:41", platform: "1" },
+      { id: 117, trainNo: "G376", start: "苏州北", end: "洛阳龙门", time: "17:55", platform: "6" },
+      { id: 118, trainNo: "G3483", start: "沈阳北", end: "汉口", time: "17:58", platform: "1" },
+      { id: 119, trainNo: "G377", start: "洛阳龙门", end: "苏州东", time: "18:05", platform: "7" },
+      { id: 120, trainNo: "G496", start: "上海南", end: "平顶山西", time: "18:10", platform: "5" },
+      { id: 121, trainNo: "G108", start: "长沙南", end: "北京西", time: "18:10", platform: "3" },
+      { id: 122, trainNo: "G766", start: "周口东", end: "大同南", time: "18:17", platform: "6" },
+      { id: 123, trainNo: "G1515", start: "北京西", end: "宜昌北", time: "18:23", platform: "1" },
+      { id: 124, trainNo: "G337", start: "上海虹桥", end: "呼和浩特东", time: "18:25", platform: "6" },
+      { id: 125, trainNo: "C5747", start: "焦作西", end: "舞阳北", time: "18:32", platform: "10" },
+      { id: 126, trainNo: "G616", start: "汕头", end: "北京西", time: "18:37", platform: "3" },
+      { id: 127, trainNo: "G1215", start: "沈阳", end: "长沙南", time: "18:38", platform: "1" },
+      { id: 128, trainNo: "G503", start: "北京西", end: "株洲西", time: "18:44", platform: "1" },
+      { id: 129, trainNo: "G765", start: "漯河西", end: "延安", time: "18:49", platform: "5" },
+      { id: 130, trainNo: "G855", start: "北京西", end: "株洲西", time: "18:50", platform: "2" },
+      { id: 131, trainNo: "G2296", start: "厦门北", end: "西安北", time: "18:53", platform: "4" },
+      { id: 132, trainNo: "G1289", start: "长春西", end: "长沙南", time: "18:57", platform: "2" },
+      { id: 133, trainNo: "G648", start: "厦门", end: "郑州东", time: "19:09", platform: "3" },
+      { id: 134, trainNo: "G398", start: "南宁东", end: "北京西", time: "19:22", platform: "4" },
+      { id: 135, trainNo: "G830", start: "深圳北", end: "西安北", time: "19:27", platform: "3" },
+      { id: 136, trainNo: "G482", start: "重庆北", end: "徐州东", time: "19:35", platform: "3" },
+      { id: 137, trainNo: "G7462", start: "嘉兴南", end: "宝鸡南", time: "19:37", platform: "5" },
+      { id: 138, trainNo: "G4355", start: "北京南", end: "深圳北", time: "19:37", platform: "1" },
+      { id: 139, trainNo: "G508", start: "长沙南", end: "北京西", time: "19:39", platform: "4" },
+      { id: 140, trainNo: "C3577", start: "郑州东", end: "舞阳北", time: "19:40", platform: "10" },
+      { id: 141, trainNo: "G5345", start: "漯河西", end: "长沙南", time: "19:50", platform: "2" },
+      { id: 142, trainNo: "G1990", start: "武汉", end: "郑州东", time: "19:56", platform: "3" },
+      { id: 143, trainNo: "G7769", start: "焦作南", end: "周口东", time: "19:56", platform: "8" },
+      { id: 144, trainNo: "G2789", start: "漯河西", end: "合肥南", time: "20:00", platform: "7" },
+      { id: 145, trainNo: "C3595", start: "郑州东", end: "潢川东", time: "20:07", platform: "9" },
+      { id: 146, trainNo: "G1264", start: "广州南", end: "郑州东", time: "20:10", platform: "3" },
+      { id: 147, trainNo: "G5602", start: "上海虹桥", end: "焦作西", time: "20:15", platform: "5" },
+      { id: 148, trainNo: "G1164", start: "广州南", end: "濮阳东", time: "20:15", platform: "4" },
+      { id: 149, trainNo: "G1277", start: "哈尔滨西", end: "武汉", time: "20:21", platform: "2" },
+      { id: 150, trainNo: "G3389", start: "洛阳龙门", end: "漯河西", time: "20:25", platform: "7" },
+      { id: 151, trainNo: "G525", start: "北京西", end: "武汉", time: "20:25", platform: "1" },
+      { id: 152, trainNo: "G2235", start: "西安北", end: "合肥南", time: "20:37", platform: "8" },
+      { id: 153, trainNo: "G507", start: "北京西", end: "长沙南", time: "20:39", platform: "1" },
+      { id: 154, trainNo: "G2103", start: "威海", end: "信阳东", time: "20:47", platform: "2" },
+      { id: 155, trainNo: "C8983", start: "郑州东", end: "固始东", time: "20:57", platform: "10" },
+      { id: 156, trainNo: "C3357", start: "郑州东", end: "驻马店西", time: "21:05", platform: "9" },
+      { id: 157, trainNo: "G653", start: "杭州东", end: "洛阳龙门", time: "21:13", platform: "5" },
+      { id: 158, trainNo: "G1536", start: "昆明南", end: "濮阳东", time: "21:13", platform: "3" },
+      { id: 159, trainNo: "G527", start: "北京西", end: "武汉", time: "21:20", platform: "1" },
+      { id: 160, trainNo: "C8987", start: "郑州航空港", end: "罗山北", time: "21:22", platform: "9" },
+      { id: 161, trainNo: "G8988", start: "岳阳北", end: "石家庄", time: "21:23", platform: "3" },
+      { id: 162, trainNo: "G2282", start: "福田", end: "郑州东", time: "21:30", platform: "4" },
+      { id: 163, trainNo: "G3009", start: "青岛", end: "武汉", time: "21:53", platform: "1" },
+      { id: 164, trainNo: "G3752", start: "金华", end: "洛阳龙门", time: "21:55", platform: "6" },
+      { id: 165, trainNo: "G3822", start: "上海虹桥", end: "漯河西", time: "21:59", platform: "8" },
+      { id: 166, trainNo: "G248", start: "深圳北", end: "漯河西", time: "22:03", platform: "1" },
+      { id: 167, trainNo: "G5323", start: "洛阳龙门", end: "阜阳西", time: "22:07", platform: "7" },
+      { id: 168, trainNo: "G1190", start: "深圳北", end: "郑州东", time: "22:15", platform: "3" },
+      { id: 169, trainNo: "G2236", start: "汉口", end: "郑州东", time: "22:18", platform: "4" },
+      { id: 170, trainNo: "G455", start: "长治东", end: "周口东", time: "22:27", platform: "7" },
+      { id: 171, trainNo: "G546", start: "广州南", end: "郑州东", time: "22:36", platform: "3" },
+      { id: 172, trainNo: "C3767", start: "郑州东", end: "漯河西", time: "22:25", platform: "11" }
+    ];
 
-// DOM元素
-const $ = s => document.querySelector(s);
-const toggleEditor = $("#toggleEditor");
-const editorPanel = $("#editorPanel");
-const leftTrainList = $("#leftTrainList");
-const rightTrainList = $("#rightTrainList");
-const leftPageTip = $("#leftPageTip");
-const rightPageTip = $("#rightPageTip");
-const timeBox = $("#timeBox");
-const marqueeText = $("#marqueeText");
-const marqueeText2 = $("#marqueeText2");
-const inpSwitchSec = $("#inpSwitchSec");
-const inpMarquee = $("#inpMarquee");
-const saveMarquee = $("#saveMarquee");
-const bottomEditBox = $("#bottomEditBox");
-const sloganEditBox = $("#sloganEditBox");
-const inpSloganTop = $("#inpSloganTop");
-const inpS1 = $("#inpS1");
-const inpS2 = $("#inpS2");
-const inpS3 = $("#inpS3");
-const inpS4 = $("#inpS4");
-const inpWarn = $("#inpWarn");
-const sloganTop = $("#sloganTop");
-const slogan1 = $("#slogan1");
-const slogan2 = $("#slogan2");
-const slogan3 = $("#slogan3");
-const slogan4 = $("#slogan4");
-const sloganWarn = $("#sloganWarn");
-const editTrainId = $("#editTrainId");
-const editNo = $("#editNo");
-const editStart = $("#editStart");
-const editEnd = $("#editEnd");
-const editTime = $("#editTime");
-const editPlat = $("#editPlat");
-const btnUpdate = $("#btnUpdate");
-const btnAdd = $("#btnAdd");
-const trainListShow = $("#trainListShow");
+    const $ = s => document.querySelector(s);
 
-// 分割左右车次
-function splitTrainData() {
-  const mid = Math.ceil(trainData.length / 2);
-  return {
-    left: trainData.slice(0, mid),
-    right: trainData.slice(mid)
-  }
-}
+    const toggleEditor = $("#toggleEditor");
+    const editorPanel = $("#editorPanel");
+    const leftTrainList = $("#leftTrainList");
+    const rightTrainList = $("#rightTrainList");
+    const leftPageTip = $("#leftPageTip");
+    const rightPageTip = $("#rightPageTip");
+    const timeBox = $("#timeBox");
+    const marqueeTextEl = $("#marqueeText");
+    const marqueeText2El = $("#marqueeText2");
+    const inpSwitchSec = $("#inpSwitchSec");
+    const inpMarquee = $("#inpMarquee");
+    const saveMarquee = $("#saveMarquee");
+    const bottomEditBox = $("#bottomEditBox");
+    const sloganEditBox = $("#sloganEditBox");
+    const inpSloganTop = $("#inpSloganTop");
+    const inpS1 = $("#inpS1");
+    const inpS2 = $("#inpS2");
+    const inpS3 = $("#inpS3");
+    const inpS4 = $("#inpS4");
+    const inpWarn = $("#inpWarn");
+    const sloganTop = $("#sloganTop");
+    const slogan1 = $("#slogan1");
+    const slogan2 = $("#slogan2");
+    const slogan3 = $("#slogan3");
+    const slogan4 = $("#slogan4");
+    const sloganWarn = $("#sloganWarn");
+    const editTrainId = $("#editTrainId");
+    const editNo = $("#editNo");
+    const editStart = $("#editStart");
+    const editEnd = $("#editEnd");
+    const editTime = $("#editTime");
+    const editPlat = $("#editPlat");
+    const btnUpdate = $("#btnUpdate");
+    const btnAdd = $("#btnAdd");
+    const trainListShow = $("#trainListShow");
 
-// 获取车次状态文字+class
-function getTrainStatus(now, train) {
-  const [h, m] = train.time.split(":").map(Number);
-  const target = new Date();
-  target.setHours(h, m, 0);
-  const diff = (target - now) / 60000;
-  const isStart = train.start === "漯河西";
-  if (diff <= 3) return { text: "停止检票", cls: "status-red" };
-  if (isStart) {
-    if (diff <= 20) return { text: "开始检票", cls: "status-green" };
-    if (diff <= 23) return { text: "即将检票", cls: "status-green" };
-  } else {
-    if (diff <= 16) return { text: "开始检票", cls: "status-green" };
-    if (diff <= 19) return { text: "即将检票", cls: "status-green" };
-  }
-  return { text: "正在候车", cls: "status-white" };
-}
+    function splitTrainData() {
+      const mid = Math.ceil(trainData.length / 2);
+      return {
+        left: trainData.slice(0, mid),
+        right: trainData.slice(mid)
+      };
+    }
 
-// 渲染单侧车次列表
-function renderTrainBox(boxEl, dataArr, pageIdx, pageTipEl) {
-  const totalPage = Math.ceil(dataArr.length / PAGE_SIZE);
-  const curr = pageIdx % totalPage;
-  const start = curr * PAGE_SIZE;
-  const pageData = dataArr.slice(start, start + PAGE_SIZE);
-  let html = "";
-  const now = new Date();
-  pageData.forEach((item, idx) => {
-    const st = getTrainStatus(now, item);
-    const rowCls = idx % 2 === 0 ? "row-even" : "row-odd";
-    html += `
-      <div class="train-row ${rowCls}">
-        <div class="no-wrap">${item.trainNo}</div>
-        <div class="no-wrap">${item.start}</div>
-        <div class="no-wrap">${item.end}</div>
-        <div class="no-wrap">${item.time}</div>
-        <div class="no-wrap">${item.platform}</div>
-        <div class="${st.cls} no-wrap">${st.text}</div>
-      </div>
-    `;
-  });
-  boxEl.innerHTML = html;
-  pageTipEl.innerHTML = `${boxEl.id==="leftTrainList"?"左侧":"右侧"} ${curr+1}/${totalPage} 页，共${dataArr.length}趟，每${switchSecond}秒切换`;
-}
+    function getTrainStatus(now, train) {
+      const [h, m] = train.time.split(":").map(Number);
+      const target = new Date();
+      target.setHours(h, m, 0);
+      const diff = (target - now) / 60000;
+      const isStart = train.start === "漯河西";
 
-// 渲染全部车次
-function renderAllTrain() {
-  const split = splitTrainData();
-  renderTrainBox(leftTrainList, split.left, leftPageIdx, leftPageTip);
-  renderTrainBox(rightTrainList, split.right, rightPageIdx, rightPageTip);
-  renderTrainListShow();
-}
+      if (diff <= 3) return { text: "停止检票", cls: "status-red" };
 
-// 渲染底部车次列表
-function renderTrainListShow() {
-  let html = "";
-  trainData.forEach(item => {
-    html += `<div style="margin-top:4px;font-size:13px;color:#bbb">ID ${item.id}｜${item.trainNo}｜${item.start}→${item.end}</div>`;
-  })
-  trainListShow.innerHTML = html;
-}
+      if (isStart) {
+        if (diff <= 20) return { text: "开始检票", cls: "status-green" };
+        if (diff <= 23) return { text: "即将检票", cls: "status-green" };
+      } else {
+        if (diff <= 16) return { text: "开始检票", cls: "status-green" };
+        if (diff <= 19) return { text: "即将检票", cls: "status-green" };
+      }
 
-// 刷新自动翻页定时器
-function resetPageTimer() {
-  if (timerPage) clearInterval(timerPage);
-  timerPage = setInterval(() => {
-    leftPageIdx++;
-    rightPageIdx++;
-    renderAllTrain();
-  }, switchSecond * 1000);
-}
+      return { text: "正在候车", cls: "status-white" };
+    }
 
-// 刷新标语显示
-function refreshSloganUI() {
-  sloganTop.innerText = sloganData.top;
-  slogan1.innerText = sloganData.s1;
-  slogan2.innerText = sloganData.s2;
-  slogan3.innerText = sloganData.s3;
-  slogan4.innerText = sloganData.s4;
-  sloganWarn.innerText = sloganData.warn;
-  inpSloganTop.value = sloganData.top;
-  inpS1.value = sloganData.s1;
-  inpS2.value = sloganData.s2;
-  inpS3.value = sloganData.s3;
-  inpS4.value = sloganData.s4;
-  inpWarn.value = sloganData.warn;
-}
+    function renderTrainBox(boxEl, dataArr, pageIdx, pageTipEl) {
+      const totalPage = Math.ceil(dataArr.length / PAGE_SIZE);
+      const curr = pageIdx % totalPage;
+      const start = curr * PAGE_SIZE;
+      const pageData = dataArr.slice(start, start + PAGE_SIZE);
 
-// 刷新跑马灯
-function refreshMarqueeUI() {
-  marqueeText.innerText = marqueeText;
-  marqueeText2.innerText = marqueeText;
-  inpMarquee.value = marqueeText;
-}
+      let html = "";
+      const now = new Date();
 
-// 刷新时间
-function updateTime() {
-  const d = new Date();
-  const week = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][d.getDay()];
-  const pad = n => String(n).padStart(2, "0");
-  const str = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  timeBox.innerText = str;
-}
+      pageData.forEach((item, idx) => {
+        const st = getTrainStatus(now, item);
+        const rowCls = idx % 2 === 0 ? "row-even" : "row-odd";
 
-// 切换编辑面板显示
-function toggleEditorShow() {
-  const show = editorPanel.style.display === "block";
-  if (!show) {
-    editorPanel.style.display = "block";
-    leftPageTip.style.display = "block";
-    rightPageTip.style.display = "block";
-    bottomEditBox.style.display = "flex";
-    sloganEditBox.style.display = "block";
-    toggleEditor.innerText = "关闭后台编辑面板";
-  } else {
-    editorPanel.style.display = "none";
-    leftPageTip.style.display = "none";
-    rightPageTip.style.display = "none";
-    bottomEditBox.style.display = "none";
-    sloganEditBox.style.display = "none";
-    toggleEditor.innerText = "打开后台编辑面板";
-  }
-}
+        html += `
+          <div class="train-row ${rowCls}">
+            <div class="no-wrap">${item.trainNo}</div>
+            <div class="no-wrap">${item.start}</div>
+            <div class="no-wrap">${item.end}</div>
+            <div class="no-wrap">${item.time}</div>
+            <div class="no-wrap">${item.platform}</div>
+            <div class="${st.cls} no-wrap">${st.text}</div>
+          </div>
+        `;
+      });
 
-// 新增车次
-function addNewTrain() {
-  const no = editNo.value.trim();
-  const s = editStart.value.trim();
-  const e = editEnd.value.trim();
-  const t = editTime.value.trim();
-  const p = editPlat.value.trim();
-  if (!no || !s || !e || !t || !p) return alert("请完整填写车次信息");
-  const newId = trainData.length > 0 ? Math.max(...trainData.map(i=>i.id)) + 1 : 1;
-  trainData.push({
-    id: newId,
-    trainNo: no,
-    start: s,
-    end: e,
-    time: t,
-    platform: p
-  });
-  editNo.value = "";
-  editStart.value = "";
-  editEnd.value = "";
-  editTime.value = "";
-  editPlat.value = "";
-  renderAllTrain();
-}
+      boxEl.innerHTML = html;
+      pageTipEl.innerHTML = `${boxEl.id === "leftTrainList" ? "左侧" : "右侧"} ${curr + 1}/${totalPage} 页，共${dataArr.length}趟，每${switchSecond}秒切换`;
+    }
 
-// 修改车次（完整无截断函数）
-function updateOneTrain() {
-  const id = Number(editTrainId.value.trim());
-  if (!id) return alert("请输入要修改的车次ID");
-  const target = trainData.find(item => item.id === id);
-  if (!target) return alert("未找到该ID对应的车次");
+    function renderAllTrain() {
+      const split = splitTrainData();
+      renderTrainBox(leftTrainList, split.left, leftPageIdx, leftPageTip);
+      renderTrainBox(rightTrainList, split.right, rightPageIdx, rightPageTip);
+      renderTrainListShow();
+    }
 
-  if (editNo.value.trim()) target.trainNo = editNo.value.trim();
-  if (editStart.value.trim()) target.start = editStart.value.trim();
-  if (editEnd.value.trim()) target.end = editEnd.value.trim();
-  if (editTime.value.trim()) target.time = editTime.value.trim();
-  if (editPlat.value.trim()) target.platform = editPlat.value.trim();
+    function renderTrainListShow() {
+      let html = "";
+      trainData.forEach(item => {
+        html += `<div style="margin-top:4px;font-size:13px;color:#bbb">ID ${item.id}｜${item.trainNo}｜${item.start}→${item.end}</div>`;
+      });
+      trainListShow.innerHTML = html;
+    }
 
-  editTrainId.value = "";
-  editNo.value =
+    function resetPageTimer() {
+      if (timerPage) clearInterval(timerPage);
+      timerPage = setInterval(() => {
+        leftPageIdx++;
+        rightPageIdx++;
+        renderAllTrain();
+      }, switchSecond * 1000);
+    }
+
+    function refreshSloganUI() {
+      sloganTop.innerText = sloganData.top;
+      slogan1.innerText = sloganData.s1;
+      slogan2.innerText = sloganData.s2;
+      slogan3.innerText = sloganData.s3;
+      slogan4.innerText = sloganData.s4;
+      sloganWarn.innerText = sloganData.warn;
+
+      inpSloganTop.value = sloganData.top;
+      inpS1.value = sloganData.s1;
+      inpS2.value = sloganData.s2;
+      inpS3.value = sloganData.s3;
+      inpS4.value = sloganData.s4;
+      inpWarn.value = sloganData.warn;
+    }
+
+    function refreshMarqueeUI() {
+      marqueeTextEl.innerText = marqueeText;
+      marqueeText2El.innerText = marqueeText;
+      inpMarquee.value = marqueeText;
+    }
+
+    function updateTime() {
+      const d = new Date();
+      const week = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][d.getDay()];
+      const pad = n => String(n).padStart(2, "0");
+      const str = `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+      timeBox.innerText = str;
+    }
+
+    function toggleEditorShow() {
+      const show = editorPanel.style.display === "block";
+
+      if (!show) {
+        editorPanel.style.display = "block";
+        leftPageTip.style.display = "block";
+        rightPageTip.style.display = "block";
+        bottomEditBox.style.display = "flex";
+        sloganEditBox.style.display = "block";
+        toggleEditor.innerText = "关闭后台编辑面板";
+      } else {
+        editorPanel.style.display = "none";
+        leftPageTip.style.display = "none";
+        rightPageTip.style.display = "none";
+        bottomEditBox.style.display = "none";
+        sloganEditBox.style.display = "none";
+        toggleEditor.innerText = "打开后台编辑面板";
+      }
+    }
+
+    function addNewTrain() {
+      const no = editNo.value.trim();
+      const s = editStart.value.trim();
+      const e = editEnd.value.trim();
+      const t = editTime.value.trim();
+      const p = editPlat.value.trim();
+
+      if (!no || !s || !e || !t || !p) return alert("请完整填写车次信息");
+
+      const newId = trainData.length > 0 ? Math.max(...trainData.map(i => i.id)) + 1 : 1;
+
+      trainData.push({
+        id: newId,
+        trainNo: no,
+        start: s,
+        end: e,
+        time: t,
+        platform: p
+      });
+
+      editNo.value = "";
+      editStart.value = "";
+      editEnd.value = "";
+      editTime.value = "";
+      editPlat.value = "";
+
+      renderAllTrain();
+    }
+
+    function updateOneTrain() {
+      const id = Number(editTrainId.value.trim());
+      if (!id) return alert("请输入要修改的车次ID");
+
+      const target = trainData.find(item => item.id === id);
+      if (!target) return alert("未找到该ID对应的车次");
+
+      if (editNo.value.trim()) target.trainNo = editNo.value.trim();
+      if (editStart.value.trim()) target.start = editStart.value.trim();
+      if (editEnd.value.trim()) target.end = editEnd.value.trim();
+      if (editTime.value.trim()) target.time = editTime.value.trim();
+      if (editPlat.value.trim()) target.platform = editPlat.value.trim();
+
+      editTrainId.value = "";
+      editNo.value = "";
+      editStart.value = "";
+      editEnd.value = "";
+      editTime.value = "";
+      editPlat.value = "";
+
+      renderAllTrain();
+    }
+
+    function saveMarqueeText() {
+      const val = inpMarquee.value.trim();
+      if (!val) return alert("底部文字不能为空");
+      marqueeText = val;
+      refreshMarqueeUI();
+    }
+
+    function saveSlogan() {
+      sloganData.top = inpSloganTop.value.trim();
+      sloganData.s1 = inpS1.value.trim();
+      sloganData.s2 = inpS2.value.trim();
+      sloganData.s3 = inpS3.value.trim();
+      sloganData.s4 = inpS4.value.trim();
+      sloganData.warn = inpWarn.value.trim();
+      refreshSloganUI();
+    }
+
+    function saveSwitchSecond() {
+      const val = Number(inpSwitchSec.value);
+      if (val < 5) return alert("自动翻页间隔最小为5秒");
+      switchSecond = val;
+      resetPageTimer();
+      renderAllTrain();
+    }
+
+    toggleEditor.addEventListener("click", toggleEditorShow);
+    btnAdd.addEventListener("click", addNewTrain);
+    btnUpdate.addEventListener("click", updateOneTrain);
+    saveMarquee.addEventListener("click", saveMarqueeText);
+    inpSwitchSec.addEventListener("change", saveSwitchSecond);
+    inpSloganTop.addEventListener("change", saveSlogan);
+    inpS1.addEventListener("change", saveSlogan);
+    inpS2.addEventListener("change", saveSlogan);
+    inpS3.addEventListener("change", saveSlogan);
+    inpS4.addEventListener("change", saveSlogan);
+    inpWarn.addEventListener("change", saveSlogan);
+
+    function init() {
+      refreshSloganUI();
+      refreshMarqueeUI();
+      updateTime();
+      renderAllTrain();
+      resetPageTimer();
+      setInterval(updateTime, 1000);
+    }
+
+    init();
+  </script>
+</body>
+</html>
