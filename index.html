@@ -63,8 +63,6 @@
     .train-list {
       flex: 1;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
     .train-row {
       display: grid;
@@ -72,8 +70,6 @@
       padding: 12px 6px;
       font-size: 22px;
       text-align: center;
-      flex: 1;
-      align-items: center;
     }
     .row-even { background: #0f5080; }
     .row-odd { background: #0a4068; }
@@ -105,6 +101,7 @@
       width: 100%;
       height: 100%;
     }
+    /* 仅标题单独上移，其余文字不动 */
     .slogan-title {
       font-size: 46px;
       font-weight: bold;
@@ -112,6 +109,7 @@
       width: 100%;
       text-align: center;
       white-space: nowrap;
+      margin-top: -30px;
     }
     .slogan-text {
       font-size: 38px;
@@ -258,7 +256,7 @@
           <div class="slogan-text" id="slogan2">富强 民主 文明 和谐</div>
           <div class="slogan-text" id="slogan3">自由 平等 公正 法治</div>
           <div class="slogan-text" id="slogan4">爱国 敬业 诚信 友善</div>
-          <div class="slogan-warning" id="sloganWarn">开车前3分钟停止检票</div>
+          <div class="slogan-warning" id="sloganWarn">开车前5分钟停止检票</div>
         </div>
       </div>
       <div class="slogan-edit" id="sloganEditBox">
@@ -295,8 +293,7 @@
   <div class="editor-panel" id="editorPanel">
     <div class="editor-title">参数与车次编辑区</div>
     <div class="block-line">
-      <div style="font-size:14px;margin-bottom:6px">自动翻页间隔（秒，最小5）</div>
-      <input type="number" min="5" class="input-item" id="inpSwitchSec" value="30">
+      <div style="font-size:14px;margin-bottom:6px">自动翻页间隔（固定20秒，不可修改）</div>
     </div>
     <div>
       <input class="input-item" id="editTrainId" placeholder="车次ID（修改用）">
@@ -313,27 +310,35 @@
     <div class="rule-desc">
 规则说明：<br/>
 1.始发站=漯河西 → 始发车；其余过路车<br/>
-2.正在候车白色，即将/开始检票绿色，停止检票红色<br/>
-3.左右车次按时间连续分段，无早晚割裂<br/>
-4.列表自适应填满框体，无底部空白<br/>
-5.发车完成车次自动过滤不展示
+2.开车前5分钟变红停止检票；停止检票满2分钟自动移除大屏<br/>
+3.单页左8条右8条，左右车次时间连续衔接，一页合计16条<br/>
+4.最多展示前48条（3页），每页固定停留20秒；车次不足自动减少轮播页数<br/>
+5.车次不足填满页面时底部保留空白，不拉伸行高
     </div>
     <div class="train-list-desc">后台全部车次列表：</div>
     <div id="trainListShow"></div>
   </div>
 <script>
-let switchSecond = 30;
-let leftPageIdx = 0;
-let rightPageIdx = 0;
+const PAGE_ROW = 8;
+const ONE_PAGE_TOTAL = PAGE_ROW * 2;
+const MAX_SHOW_TOTAL = ONE_PAGE_TOTAL * 3;
+const PAGE_STAY_MS = 20000;
+const STOP_CHECK_MIN = 5;
+const REMOVE_AFTER_STOP_MIN = 2;
+
+let pageIndex = 0;
 let timerPage = null;
-let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请管理好自己的携带物品，杆状物品严禁超越安全线";
+let timerRefreshTrain = null;
+let pageCount = 0;
+
+let marqueeText = "请家长朋友看管好自己的小孩不要乱跑。旅客们，请看管好自身携带的行李物品，杆状物品严禁超越安全线";
 let sloganData = {
   top: "漯河西站欢迎您",
   s1: "社会主义核心价值观",
   s2: "富强 民主 文明 和谐",
   s3: "自由 平等 公正 法治",
   s4: "爱国 敬业 诚信 友善",
-  warn: "开车前3分钟停止检票"
+  warn: "开车前5分钟停止检票"
 };
 let trainData = [
   {id:1, trainNo:"G2104", start:"信阳东", end:"威海", time:"07:27", platform:"3"},
@@ -509,6 +514,7 @@ let trainData = [
   {id:171, trainNo:"G546", start:"广州南", end:"郑州东", time:"22:36", platform:"3"},
   {id:172, trainNo:"C3767", start:"郑州东", end:"漯河西", time:"22:25", platform:"11"}
 ];
+
 const $ = s => document.querySelector(s);
 const toggleEditor = $("#toggleEditor");
 const editorPanel = $("#editorPanel");
@@ -519,7 +525,6 @@ const rightPageTip = $("#rightPageTip");
 const timeBox = $("#timeBox");
 const marqueeTextDom = $("#marqueeText");
 const marqueeText2Dom = $("#marqueeText2");
-const inpSwitchSec = $("#inpSwitchSec");
 const inpMarquee = $("#inpMarquee");
 const saveMarquee = $("#saveMarquee");
 const bottomEditBox = $("#bottomEditBox");
@@ -546,6 +551,7 @@ const btnUpdate = $("#btnUpdate");
 const btnAdd = $("#btnAdd");
 const trainListShow = $("#trainListShow");
 
+// 过滤有效车次：未发车、停检未满2分钟
 function getValidTrains() {
   const now = new Date();
   return trainData.filter(train => {
@@ -553,21 +559,25 @@ function getValidTrains() {
     const target = new Date();
     target.setHours(h, m, 0);
     const diffMin = (target - now) / 60000;
-    return diffMin > 0;
+    // 开车前3分钟直接移除（停检满2分钟）
+    return diffMin > REMOVE_AFTER_STOP_MIN;
   }).sort((a, b) => {
     const tA = a.time.split(":").map(Number);
     const tB = b.time.split(":").map(Number);
     return (tA[0] * 60 + tA[1]) - (tB[0] * 60 + tB[1]);
-  });
+  }).slice(0, MAX_SHOW_TOTAL);
 }
 
+// 获取车次状态文字与样式
 function getTrainStatus(now, train) {
   const [h, m] = train.time.split(":").map(Number);
   const target = new Date();
   target.setHours(h, m, 0);
   const diffMin = (target - now) / 60000;
   const isLocalStart = train.start === "漯河西";
-  if (diffMin <= 3) return { text: "停止检票", cls: "status-red" };
+  if (diffMin <= STOP_CHECK_MIN) {
+    return { text: "停止检票", cls: "status-red" };
+  }
   if (isLocalStart) {
     if (diffMin <= 20) return { text: "开始检票", cls: "status-green" };
     if (diffMin <= 23) return { text: "即将检票", cls: "status-green" };
@@ -578,16 +588,13 @@ function getTrainStatus(now, train) {
   return { text: "正在候车", cls: "status-white" };
 }
 
-function renderTrainBox(boxDom, dataList, pageIndex, tipDom) {
-  const totalPages = Math.ceil(dataList.length / 8);
-  const currPage = pageIndex % totalPages;
-  const startIdx = currPage * 8;
-  const pageData = dataList.slice(startIdx, startIdx + 8);
-  const now = new Date();
+// 渲染单侧列表
+function renderTrainBox(boxDom, dataList, tipDom) {
   let htmlStr = "";
-  pageData.forEach((item, idx) => {
+  const now = new Date();
+  dataList.forEach(item => {
     const status = getTrainStatus(now, item);
-    const rowClass = idx % 2 === 0 ? "row-even" : "row-odd";
+    const rowClass = dataList.indexOf(item) % 2 === 0 ? "row-even" : "row-odd";
     htmlStr += `
       <div class="train-row ${rowClass}">
         <div class="no-wrap">${item.trainNo}</div>
@@ -600,16 +607,28 @@ function renderTrainBox(boxDom, dataList, pageIndex, tipDom) {
     `;
   });
   boxDom.innerHTML = htmlStr;
-  tipDom.innerText = `${boxDom.id === "leftTrainList" ? "左侧" : "右侧"} ${currPage + 1}/${totalPages} 页，每${switchSecond}秒切换`;
 }
 
-function renderAllTrain() {
-  const validTrainList = getValidTrains();
-  const midPoint = Math.ceil(validTrainList.length / 2);
-  const leftData = validTrainList.slice(0, midPoint);
-  const rightData = validTrainList.slice(midPoint);
-  renderTrainBox(leftTrainList, leftData, leftPageIdx, leftPageTip);
-  renderTrainBox(rightTrainList, rightData, rightPageIdx, rightPageTip);
+// 全局渲染分页
+function renderAllPage() {
+  const valid = getValidTrains();
+  // 计算实际需要展示页数
+  const rawPage = Math.ceil(valid.length / ONE_PAGE_TOTAL);
+  pageCount = Math.min(rawPage, 3);
+  if (pageCount === 0) {
+    leftTrainList.innerHTML = "";
+    rightTrainList.innerHTML = "";
+    return;
+  }
+  // 当前分页数据切片
+  const currStart = pageIndex * ONE_PAGE_TOTAL;
+  const pageData = valid.slice(currStart, currStart + ONE_PAGE_TOTAL);
+  const leftData = pageData.slice(0, PAGE_ROW);
+  const rightData = pageData.slice(PAGE_ROW, PAGE_ROW * 2);
+  renderTrainBox(leftTrainList, leftData, leftPageTip);
+  renderTrainBox(rightTrainList, rightData, rightPageTip);
+  leftPageTip.innerText = `左侧 ${pageIndex+1}/${pageCount} 页`;
+  rightPageTip.innerText = `右侧 ${pageIndex+1}/${pageCount} 页`;
   renderTrainListPanel();
 }
 
@@ -621,13 +640,26 @@ function renderTrainListPanel() {
   trainListShow.innerHTML = html;
 }
 
+// 重置翻页计时器
 function resetPageTimer() {
   if (timerPage) clearInterval(timerPage);
+  pageIndex = 0;
+  renderAllPage();
   timerPage = setInterval(() => {
-    leftPageIdx += 1;
-    rightPageIdx += 1;
-    renderAllTrain();
-  }, switchSecond * 1000);
+    pageIndex = (pageIndex + 1) % pageCount;
+    renderAllPage();
+  }, PAGE_STAY_MS);
+}
+
+// 每秒刷新车次列表（剔除过期）
+function refreshTrainLoop() {
+  const oldValid = getValidTrains();
+  setTimeout(() => {
+    const newValid = getValidTrains();
+    if (oldValid.length !== newValid.length) {
+      resetPageTimer();
+    }
+  }, 1000);
 }
 
 function refreshSloganUI() {
@@ -656,100 +688,4 @@ function updateTime() {
   const weekArr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
   const week = weekArr[d.getDay()];
   const pad = num => String(num).padStart(2, "0");
-  const timeStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  timeBox.innerText = timeStr;
-}
-
-function toggleEditorShow() {
-  const isShow = editorPanel.style.display === "block";
-  if (!isShow) {
-    editorPanel.style.display = "block";
-    leftPageTip.style.display = "block";
-    rightPageTip.style.display = "block";
-    bottomEditBox.style.display = "flex";
-    sloganEditBox.style.display = "block";
-    toggleEditor.innerText = "关闭后台编辑面板";
-  } else {
-    editorPanel.style.display = "none";
-    leftPageTip.style.display = "none";
-    rightPageTip.style.display = "none";
-    bottomEditBox.style.display = "none";
-    sloganEditBox.style.display = "none";
-    toggleEditor.innerText = "打开后台编辑面板";
-  }
-}
-
-function addNewTrain() {
-  const no = editNo.value.trim();
-  const start = editStart.value.trim();
-  const end = editEnd.value.trim();
-  const time = editTime.value.trim();
-  const plat = editPlat.value.trim();
-  if (!no || !start || !end || !time || !plat) {
-    alert("请完整填写车次所有信息");
-    return;
-  }
-  const newId = trainData.length > 0 ? Math.max(...trainData.map(i => i.id)) + 1 : 1;
-  trainData.push({id: newId, trainNo: no, start: start, end: end, time: time, platform: plat});
-  editNo.value = "";
-  editStart.value = "";
-  editEnd.value = "";
-  editTime.value = "";
-  editPlat.value = "";
-  renderAllTrain();
-}
-
-function updateSingleTrain() {
-  const targetId = Number(editTrainId.value.trim());
-  if (!targetId) {alert("请输入要修改的车次ID");return;}
-  const targetTrain = trainData.find(item => item.id === targetId);
-  if (!targetTrain) {alert("未找到对应ID的车次");return;}
-  if (editNo.value.trim()) targetTrain.trainNo = editNo.value.trim();
-  if (editStart.value.trim()) targetTrain.start = editStart.value.trim();
-  if (editEnd.value.trim()) targetTrain.end = editEnd.value.trim();
-  if (editTime.value.trim()) targetTrain.time = editTime.value.trim();
-  if (editPlat.value.trim()) targetTrain.platform = editPlat.value.trim();
-  editTrainId.value = "";
-  editNo.value = "";
-  editStart.value = "";
-  editEnd.value = "";
-  editTime.value = "";
-  editPlat.value = "";
-  renderAllTrain();
-}
-
-function bindAllEvents() {
-  toggleEditor.addEventListener("click", toggleEditorShow);
-  inpSwitchSec.addEventListener("change", () => {
-    let val = Number(inpSwitchSec.value);
-    if (val < 5) val = 5;
-    switchSecond = val;
-    resetPageTimer();
-  });
-  saveMarquee.addEventListener("click", () => {
-    marqueeText = inpMarquee.value;
-    refreshMarqueeUI();
-  });
-  inpSloganTop.addEventListener("input", e => sloganData.top = e.target.value);
-  inpS1.addEventListener("input", e => sloganData.s1 = e.target.value);
-  inpS2.addEventListener("input", e => sloganData.s2 = e.target.value);
-  inpS3.addEventListener("input", e => sloganData.s3 = e.target.value);
-  inpS4.addEventListener("input", e => sloganData.s4 = e.target.value);
-  inpWarn.addEventListener("input", e => sloganData.warn = e.target.value);
-  btnAdd.addEventListener("click", addNewTrain);
-  btnUpdate.addEventListener("click", updateSingleTrain);
-}
-
-function initPage() {
-  refreshSloganUI();
-  refreshMarqueeUI();
-  renderAllTrain();
-  resetPageTimer();
-  bindAllEvents();
-  setInterval(updateTime, 1000);
-  updateTime();
-}
-initPage();
-</script>
-</body>
-</html>
+  const timeStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${week} ${pad(d.getHours())}:${pad(d.getMinutes
