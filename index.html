@@ -579,10 +579,10 @@ function getTrainStatus(now, train) {
   }
   if (isLocalStart) {
     if (diffMin <= 20) return { text: "开始检票", cls: "status-green" };
-    if (diffMin <= 23) return { text: "即将检票", cls: "status-green" };
+    if (diffMin <= 23) return { text: "即将检票", cls: "status-white" };
   } else {
     if (diffMin <= 16) return { text: "开始检票", cls: "status-green" };
-    if (diffMin <= 19) return { text: "即将检票", cls: "status-green" };
+    if (diffMin <= 19) return { text: "即将检票", cls: "status-white" };
   }
   return { text: "正在候车", cls: "status-white" };
 }
